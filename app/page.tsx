@@ -39,8 +39,8 @@ const houseIcons = {
 }
 
 const hardcodedData: ScoreData[] = [
-  ["React Rebels", "875", "Frontend"],
-  ["Node Ninjas", "762", "Backend"],
+  ["React Rebels", "953", "Frontend"],
+  ["Node Ninjas", "992", "Backend"],
   ["MERN Mavericks", "888", "FullStack"],
   ["Team meow", "954", "DevOps"],
   ["Vue Virtuosos", "654", "Frontend"],
@@ -105,8 +105,10 @@ export default function Component({
     return [...data].sort((a, b) => parseInt(b[1]) - parseInt(a[1])).slice(0, 3)
   }, [data])
 
+
+
   return (
-    <div className="px-4 py-8 space-y-8 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
+    <div className="px-16 py-8 space-y-8 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
 
       {/* Main Heading */}
       <motion.div
@@ -126,20 +128,62 @@ export default function Component({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        {topTeams.map((team, index) => (
-          <Card key={team[0]} className={`${houseColors[team[2] as keyof typeof houseColors]} shadow-lg`}>
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                <span>{team[0]}</span>
-                {houseIcons[team[2] as keyof typeof houseIcons]}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold mb-2">{team[1]} points</p>
-              <p className="text-sm">{team[2]}</p>
-            </CardContent>
-          </Card>
-        ))}
+        {/* First Position */}
+        {
+          topTeams.length >= 1 ?
+
+            <Card key={topTeams[0][0]} className={`${houseColors[topTeams[0][2] as keyof typeof houseColors]} shadow-lg`}>
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  <span>{"1ˢᵗ " + topTeams[0][0]}</span>
+                  {houseIcons[topTeams[0][2] as keyof typeof houseIcons]}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-3xl font-bold mb-2">{topTeams[0][1]} points</p>
+                <p className="text-sm">{topTeams[0][2]}</p>
+              </CardContent>
+            </Card> : <div></div>
+        }
+
+        {/* Second Position */}
+        {
+          topTeams.length >= 2 ?
+
+            <Card key={topTeams[1][0]} className={`${houseColors[topTeams[1][2] as keyof typeof houseColors]} shadow-lg`}>
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  <span>{"2ⁿᵈ " + topTeams[1][0]}</span>
+                  {houseIcons[topTeams[1][2] as keyof typeof houseIcons]}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-3xl font-bold mb-2">{topTeams[1][1]} points</p>
+                <p className="text-sm">{topTeams[1][2]}</p>
+              </CardContent>
+            </Card> : <div></div>
+        }
+
+        {/* Third Position */}
+        {
+          topTeams.length >= 3 ?
+
+            <Card key={topTeams[2][0]} className={`${houseColors[topTeams[2][2] as keyof typeof houseColors]} shadow-lg`}>
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  <span>{"3ʳᵈ " + topTeams[2][0]}</span>
+                  {houseIcons[topTeams[2][2] as keyof typeof houseIcons]}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-3xl font-bold mb-2">{topTeams[2][1]} points</p>
+                <p className="text-sm">{topTeams[2][2]}</p>
+              </CardContent>
+            </Card> : <div></div>
+        }
+
+
+
       </motion.div>
 
       {/* Search Box */}
