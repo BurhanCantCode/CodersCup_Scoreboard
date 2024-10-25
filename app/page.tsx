@@ -61,7 +61,7 @@ const hardcodedData: ScoreData[] = [
   ["Team woof", "945", "DevOps"],
 ]
 
-export default function Component({ 
+export default function Component({
   fields = ["Team Name", "Score", "House"],
   data = hardcodedData,
 }: ScoreTableProps) {
@@ -71,12 +71,14 @@ export default function Component({
 
   const houses = Object.keys(houseColors)
 
+  data = [...data].sort((a, b) => parseInt(b[1]) - parseInt(a[1]));
+
   const filteredAndSortedData = useMemo(() => {
-    let filteredData = data.filter(row => 
+    let filteredData = data.filter(row =>
       row.some(cell => cell.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (!selectedHouse || row[2] === selectedHouse)
     )
-    
+
     if (sortConfig !== null) {
       filteredData.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -105,6 +107,8 @@ export default function Component({
 
   return (
     <div className="px-4 py-8 space-y-8 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
+
+      {/* Main Heading */}
       <motion.div
         className="text-center space-y-4"
         initial={{ opacity: 0, y: -50 }}
@@ -115,7 +119,8 @@ export default function Component({
         <p className="text-xl text-indigo-600">Celebrating coding excellence across all specializations</p>
       </motion.div>
 
-      <motion.div 
+      {/* Cards */}
+      <motion.div
         className="grid gap-6 md:grid-cols-3"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -137,7 +142,8 @@ export default function Component({
         ))}
       </motion.div>
 
-      <motion.div 
+      {/* Search Box */}
+      <motion.div
         className="flex flex-col space-y-4 mb-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -169,7 +175,9 @@ export default function Component({
           ))}
         </div>
       </motion.div>
-      
+
+
+      {/* Results Table */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
